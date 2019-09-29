@@ -14,7 +14,6 @@ public class AccesoDatos1 {
 		MetodosIn datos1 = new FileManager();
 		MetodosIn datos2 = new BDManager();
 		int select;
-		String insertando;
 		Scanner scanner = new Scanner(System.in);
 		do {
 			System.out.println("** Menu Oficial ** ");

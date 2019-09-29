@@ -24,30 +24,30 @@ public class BDManager implements MetodosIn {
 
 	@Override
 	public void conectar() {
-		//Properties propiedades = new Properties();
+		// Properties propiedades = new Properties();
 		try {
 			// propiedades.load(new FileInputStream("config.ini"));
 			// Conexion basica a bbdd con url, usuario y contrasena.
 			String url = "jdbc:mysql://localhost:3306/productos"
 					+ "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-			//String user = propiedades.getProperty("usuario");
-			//String pass = propiedades.getProperty("password");
+			// String user = propiedades.getProperty("usuario");
+			// String pass = propiedades.getProperty("password");
 			String user = "root";
 			String pass = "";
 			Connection con = DriverManager.getConnection(url, user, pass);
-				// Crea la conexion.
-				System.out.println("¡Conectado a la base de datos!");
-				Statement stmt = con.createStatement();
-				String query = "SELECT * from patos ;";
-				ResultSet rs = stmt.executeQuery(query);
-				while (rs.next()) {
-					// Muestra la informacion de la BBDD y la printea en pantalla con formato.
-					String id = rs.getObject(1).toString();
-					String nombre = rs.getObject(2).toString();
-					String raza = rs.getObject(3).toString();
-					System.out.println(
-							"Id pato: " + id + " || " + " Nombre pato: " + nombre + " || " + " Raza pato: " + raza);
-				}
+			// Crea la conexion.
+			System.out.println("¡Conectado a la base de datos!");
+			Statement stmt = con.createStatement();
+			String query = "SELECT * from patos ;";
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				// Muestra la informacion de la BBDD y la printea en pantalla con formato.
+				String id = rs.getObject(1).toString();
+				String nombre = rs.getObject(2).toString();
+				String raza = rs.getObject(3).toString();
+				System.out.println(
+						"Id pato: " + id + " || " + " Nombre pato: " + nombre + " || " + " Raza pato: " + raza);
+			}
 		} catch (Exception e) {
 			System.out.println("¡No se ha podido acceder al fichero config.ini o la propia BBDD");
 			e.printStackTrace();
@@ -59,7 +59,7 @@ public class BDManager implements MetodosIn {
 		// -------
 		// Este metodo se cumple en el metodo de conectar ya que me parecia
 		// mejor poner todo en uno, y asi para mostrar los datos solo hay que utilizar
-		// uno y directamente se conecta.
+		// uno y directamente se conecta a la BBDD.
 		// -------
 	}
 
@@ -133,9 +133,9 @@ public class BDManager implements MetodosIn {
 			try {
 				// Insercion en fichero por teclado mediante scanner.
 				PrintWriter out = new PrintWriter(new FileWriter("Prueba3.txt", true));
-				 insertando = id + ";" + nombre + ";" + raza ;
+				insertando = id + ";" + nombre + ";" + raza;
 				out.println(insertando);
-				
+
 				out.close();
 			} catch (IOException e) {
 				// Cuando no consigue insertar los datos propuestos.
