@@ -131,6 +131,15 @@ public class FileManager implements MetodosIn {
 		switch (select) {
 		case 1:
 			System.out.println("Vaciar Fichero");
+			try {
+				PrintWriter out = new PrintWriter(new FileWriter("PruebaBorrando.txt"));
+				out.print("");
+				out.close();
+			} catch (IOException e) {
+				// Lo que ocurre cuando no consigue entrar en los datos del fichero.
+				System.out.println("Error en lectura o escritura de Fichero");
+				e.printStackTrace();
+			}
 
 			break;
 
