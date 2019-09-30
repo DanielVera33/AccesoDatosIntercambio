@@ -146,4 +146,10 @@ public class BDManager implements MetodosIn {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public void borrar() {
+		// TODO Auto-generated method stub
+		
+	}
 }

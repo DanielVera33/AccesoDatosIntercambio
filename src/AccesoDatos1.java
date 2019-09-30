@@ -23,6 +23,7 @@ public class AccesoDatos1 {
 			System.out.println("4. Añadir datos Fichero "); // Funciona
 			System.out.println("5. Pasar los datos del 	Fichero a la Base de Datos"); // Funciona
 			System.out.println("6. Pasar los datos de la Base Datos al Fichero"); // Funciona
+			System.out.println("7. Formas de eliminar datos de Fichero");
 			System.out.println("** *** **");
 			select = scanner.nextInt();
 			switch (select) {
@@ -58,9 +59,14 @@ public class AccesoDatos1 {
 				System.out.println(" Prueba6 ");
 				datos2.pasarDatos();
 				break;
+				
+			case 7:
+				System.out.println(" Prueba7 ");
+				datos1.borrar();
+				break;
 			}
 
-		} while (select != 7);
+		} while (select != 8);
 
 	}
 

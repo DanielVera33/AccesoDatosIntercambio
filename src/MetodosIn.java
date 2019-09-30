@@ -5,4 +5,5 @@ public interface MetodosIn {
 	public void leer();
 	public void insertar();
 	public void pasarDatos();
+	public void borrar();
 }

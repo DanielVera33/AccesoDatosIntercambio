@@ -122,4 +122,23 @@ public class FileManager implements MetodosIn {
 		}
 
 	}
+
+	@Override
+	public void borrar() {
+		System.out.println("**Escribe 1 para borrar todos los datos del fichero**");
+		System.out.println("**Escribe 2 para borrar una linea del fichero**");
+		select = scanner.nextInt();
+		switch (select) {
+		case 1:
+			System.out.println("Vaciar Fichero");
+
+			break;
+
+		case 2:
+			System.out.println("Borrar una linea");
+
+			break;
+
+		}
+	}
 }
