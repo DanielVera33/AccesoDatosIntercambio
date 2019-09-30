@@ -24,16 +24,12 @@ public class BDManager implements MetodosIn {
 
 	@Override
 	public void conectar() {
-		// Properties propiedades = new Properties();
+		Properties propiedades = new Properties();
 		try {
-			// propiedades.load(new FileInputStream("config.ini"));
-			// Conexion basica a bbdd con url, usuario y contrasena.
-			String url = "jdbc:mysql://localhost:3306/productos"
-					+ "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-			// String user = propiedades.getProperty("usuario");
-			// String pass = propiedades.getProperty("password");
-			String user = "root";
-			String pass = "";
+			propiedades.load(new FileInputStream("config.ini"));
+			String url = propiedades.getProperty("dburl");
+			String user = propiedades.getProperty("usuario");
+			String pass = propiedades.getProperty("password");
 			Connection con = DriverManager.getConnection(url, user, pass);
 			// Crea la conexion.
 			System.out.println("¡Conectado a la base de datos!");
@@ -65,12 +61,14 @@ public class BDManager implements MetodosIn {
 
 	@Override
 	public void insertar() {
+		Properties propiedades = new Properties();
 		// Conexion basica a bbdd con url, usuario y contrasena.
-		String url = "jdbc:mysql://localhost:3306/productos"
-				+ "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-		String user = "root";
-		String pass = "";
-		try (Connection con = DriverManager.getConnection(url, user, pass)) {
+		try {
+			propiedades.load(new FileInputStream("config.ini"));
+			String url = propiedades.getProperty("dburl");
+			String user = propiedades.getProperty("usuario");
+			String pass = propiedades.getProperty("password");
+			Connection con = DriverManager.getConnection(url, user, pass);
 			// Crea la conexion.
 			Statement stmt = con.createStatement();
 			System.out.println("¡Conectado a la base de datos!");
@@ -100,12 +98,14 @@ public class BDManager implements MetodosIn {
 
 	@Override
 	public void pasarDatos() {
+		Properties propiedades = new Properties();
 		// Conexion basica a bbdd con url, usuario y contrasena.
-		String url = "jdbc:mysql://localhost:3306/productos"
-				+ "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-		String user = "root";
-		String pass = "";
-		try (Connection con = DriverManager.getConnection(url, user, pass)) {
+		try {
+			propiedades.load(new FileInputStream("config.ini"));
+			String url = propiedades.getProperty("dburl");
+			String user = propiedades.getProperty("usuario");
+			String pass = propiedades.getProperty("password");
+			Connection con = DriverManager.getConnection(url, user, pass);
 			// Crea la conexion.
 			System.out.println("¡Conectado a la base de datos!");
 			System.out.println("¡Insertando 5 primeros datos de la BBDD¡");

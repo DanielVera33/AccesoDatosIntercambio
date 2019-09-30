@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -8,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class FileManager implements MetodosIn {
@@ -64,12 +66,13 @@ public class FileManager implements MetodosIn {
 
 	@Override
 	public void pasarDatos() {
+		Properties propiedades = new Properties();
 		// Conexion basica a bbdd con url, usuario y contrasena.
-		String url = "jdbc:mysql://localhost:3306/productos"
-				+ "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-		String user = "root";
-		String pass = "";
 		try {
+			propiedades.load(new FileInputStream("config.ini"));
+			String url = propiedades.getProperty("dburl");
+			String user = propiedades.getProperty("usuario");
+			String pass = propiedades.getProperty("password");
 			// Crea la conexion.
 			Connection con = DriverManager.getConnection(url, user, pass);
 			System.out.println("¡Conectado a la base de datos!");
