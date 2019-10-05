@@ -6,4 +6,6 @@ public interface MetodosIn {
 	public void insertar();
 	public void pasarDatos();
 	public void borrar();
+	public void busqueda();
+	public void modificar();
 }

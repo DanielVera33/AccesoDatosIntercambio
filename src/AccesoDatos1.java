@@ -17,13 +17,21 @@ public class AccesoDatos1 {
 		Scanner scanner = new Scanner(System.in);
 		do {
 			System.out.println("** Menu Oficial ** ");
-			System.out.println("1. Mostrar datos de BD. "); // Funciona
-			System.out.println("2. Añadir datos a BD. "); // Funciona
+			System.out.println("1. Mostrar datos de BBDD. "); // Funciona
+			System.out.println("2. Añadir datos a BBDD. "); // Funciona
 			System.out.println("3. Mostrar datos de Fichero . "); // Funciona
 			System.out.println("4. Añadir datos Fichero "); // Funciona
-			System.out.println("5. Pasar los datos del 	Fichero a la Base de Datos"); // Funciona
-			System.out.println("6. Pasar los datos de la Base Datos al Fichero"); // Funciona
-			System.out.println("7. Formas de eliminar datos de Fichero");
+			System.out.println("5. Pasar los datos del 	Fichero a la BBDD"); // Funciona
+			System.out.println("6. Pasar los datos de la BBDD al Fichero"); // Funciona
+			
+			System.out.println("******* FASE 2 *******");
+			
+			System.out.println("7. Formas de eliminar datos de Fichero"); // Funciona MITAD
+			System.out.println("8. Formas de eliminar datos de BBDD"); // Funciona
+			System.out.println("9. Modificar datos de Fichero");
+			System.out.println("10. Modificar datos de BBDD"); // Funciona
+			System.out.println("11. Buscar datos de BBDD"); // Funciona
+			System.out.println("12. Buscar datos de Fichero"); 	
 			System.out.println("** *** **");
 			select = scanner.nextInt();
 			switch (select) {
@@ -64,9 +72,32 @@ public class AccesoDatos1 {
 				System.out.println(" Prueba7 ");
 				datos1.borrar();
 				break;
+				
+			case 8:
+				System.out.println(" Prueba8 ");
+				datos2.borrar();
+				break;
+				
+			case 9:
+				System.out.println(" Prueba9 ");
+				break;	
+				
+			case 10:
+				System.out.println(" Prueba10 ");
+				datos2.modificar();
+				break;	
+				
+			case 11:
+				System.out.println(" Prueba11 ");
+				datos2.busqueda();
+				break;
+				
+			case 12:
+				System.out.println(" Prueba12 ");
+				break;	
 			}
 
-		} while (select != 8);
+		} while (select != 13);
 
 	}
 

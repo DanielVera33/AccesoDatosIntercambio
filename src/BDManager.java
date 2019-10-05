@@ -8,15 +8,19 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 import java.util.Scanner;
 
 public class BDManager implements MetodosIn {
+	int select;
 	private String insertando;
 	private String id;
 	private String nombre;
 	private String raza;
+	private int introducido;
+	Scanner scanner = new Scanner(System.in);
 
 	public BDManager() {
 
@@ -149,7 +153,166 @@ public class BDManager implements MetodosIn {
 
 	@Override
 	public void borrar() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("**Escribe 1 para borrar todos los datos de la BBDD**");
+		System.out.println("**Escribe 2 para borrar una linea de la BBDD**");
+		select = scanner.nextInt();
+		Properties propiedades = new Properties();
+		switch (select) {
+		case 1:
+			System.out.println("Vaciar BBDD");
+			try {
+				propiedades.load(new FileInputStream("config.ini"));
+				String url = propiedades.getProperty("dburl");
+				String user = propiedades.getProperty("usuario");
+				String pass = propiedades.getProperty("password");
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// Crea la conexion.
+				System.out.println("¡Conectado a la base de datos!");
+				Statement stmt = con.createStatement();
+				stmt = con.createStatement();
+				String query = "DELETE FROM pruebass";
+				int deletedRows = stmt.executeUpdate(query);
+				if (deletedRows > 0) {
+					System.out.println("Borrados todos los datos de la bbdd correctamente¡¡");
+				} else {
+					System.out.println("Table already empty.");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("¡NO SE HA PODIDO CONECTAR!");
+			}
+			break;
+
+		case 2:
+			System.out.println("Borrar una linea");
+			try {
+				propiedades.load(new FileInputStream("config.ini"));
+				String url = propiedades.getProperty("dburl");
+				String user = propiedades.getProperty("usuario");
+				String pass = propiedades.getProperty("password");
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// Crea la conexion.
+
+				if (con != null) {
+					System.out.println("\n Conectado correctamente!");
+				} else {
+					System.out.println("Failed to make connection!");
+				}
+
+				Statement smt = con.createStatement();
+
+				Scanner sc = new Scanner(System.in);
+
+				System.out.print("Introduce el ID del Pato:");
+
+				String ed = sc.nextLine();
+
+				String q = "Select * from patos where id='" + ed + "'";
+
+				// Ejecutar la query
+				ResultSet rs = smt.executeQuery(q);
+
+				if (rs.next()) {
+
+					System.out.println("Id Patos:" + rs.getString(1));
+					System.out.println("Nombre:" + rs.getString(2));
+					System.out.println("Raza:" + rs.getString(3));
+					System.out.println("Seguro que quieres borrar el pato?  si o no?");
+
+					String chh = sc.nextLine();
+					if (chh.equalsIgnoreCase("si")) {
+						q = "delete from patos where id='" + ed + "'";
+						smt.executeUpdate(q);
+						System.out.println("Campo borrado...");
+					}
+				} else {
+					System.out.println("-No encontrado-");
+				}
+				con.close();
+
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			break;
+		}
+
+	}
+
+	@Override
+	public void busqueda() {
+		Properties propiedades = new Properties();
+		System.out.println("**Escribe el numero de ID para encontrar la fila deseada**");
+		introducido = scanner.nextInt();
+		try {
+			propiedades.load(new FileInputStream("config.ini"));
+			String url = propiedades.getProperty("dburl");
+			String user = propiedades.getProperty("usuario");
+			String pass = propiedades.getProperty("password");
+			Connection con = DriverManager.getConnection(url, user, pass);
+			// Crea la conexion.
+			System.out.println("¡Conectado a la base de datos!");
+			Statement stmt = con.createStatement();
+			String query = "SELECT * from patos WHERE id=" + introducido + ";";
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				// Muestra la informacion de la BBDD y la printea en pantalla con formato.
+				String id = rs.getObject(1).toString();
+				String nombre = rs.getObject(2).toString();
+				String raza = rs.getObject(3).toString();
+				System.out.println(
+						"Id pato: " + id + " || " + " Nombre pato: " + nombre + " || " + " Raza pato: " + raza);
+			}
+		} catch (Exception e) {
+			System.out.println("¡No se ha podido acceder al fichero config.ini o la propia BBDD");
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void modificar() {
+		Properties propiedades = new Properties();
+		Scanner scanner1 = new Scanner(System.in);
+		System.out.println("**Escribe el numero de ID para encontrar la fila que se quiere cambiar**");
+		introducido = scanner.nextInt();
+
+		System.out.println("Escriba el Nombre:");
+		nombre = scanner1.nextLine();
+
+		System.out.println("Escriba la Raza:");
+		raza = scanner1.nextLine();
+		try {
+			propiedades.load(new FileInputStream("config.ini"));
+			String url = propiedades.getProperty("dburl");
+			String user = propiedades.getProperty("usuario");
+			String pass = propiedades.getProperty("password");
+			Connection con = DriverManager.getConnection(url, user, pass);
+			// Crea la conexion.
+			// Cambia los datos introducidos anteriormente.
+			System.out.println("¡Conectado a la base de datos!");
+			Statement stmt = con.createStatement();
+			String query = "UPDATE patos SET nombre = " + "'" + nombre + "'" + ", raza= " + "'" + raza + "'"
+					+ " WHERE id =" + introducido + ";";
+			stmt.executeUpdate(query);
+
+			String queryy = "SELECT * from patos WHERE id=" + introducido + ";";
+			ResultSet rs = stmt.executeQuery(queryy);
+			while (rs.next()) {
+				// Muestra la informacion de la BBDD que se ha actualizado y la printea en
+				// pantalla con formato.
+				String id = rs.getObject(1).toString();
+				String nombre = rs.getObject(2).toString();
+				String raza = rs.getObject(3).toString();
+				System.out.println(
+						"Id pato: " + id + " || " + " Nombre pato: " + nombre + " || " + " Raza pato: " + raza);
+			}
+		} catch (Exception e) {
+			System.out.println("¡No se ha podido acceder al fichero config.ini o la propia BBDD");
+			e.printStackTrace();
+		}
 	}
 }

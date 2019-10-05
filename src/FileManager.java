@@ -17,6 +17,7 @@ public class FileManager implements MetodosIn {
 	private String text;
 	private String linea;
 	private String insertando;
+	private int introducido;
 	Scanner scanner = new Scanner(System.in);
 
 	public FileManager() {
@@ -145,9 +146,40 @@ public class FileManager implements MetodosIn {
 
 		case 2:
 			System.out.println("Borrar una linea");
+			System.out.println("Introduzca Numero de linea que desea borrar");
+			introducido = scanner.nextInt();
+			try {
+				int numLineas=introducido;
+				int contador=0;
 
+				String datos []=new String [numLineas];
+				
+				BufferedReader reader = new BufferedReader(new FileReader("PruebaBorrando.txt"));
+				String linea = reader.readLine();
+
+				while (linea != null && contador<numLineas)
+				{
+				   datos[contador]=linea;
+				   linea = reader.readLine();
+				   contador--;
+				   System.out.println(linea);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			break;
-
 		}
+	}
+
+	@Override
+	public void busqueda() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void modificar() {
+		// TODO Auto-generated method stub
+		
 	}
 }
