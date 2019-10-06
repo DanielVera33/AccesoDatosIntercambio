@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -11,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 import java.util.Scanner;
+
+import javax.swing.JFileChooser;
 
 public class FileManager implements MetodosIn {
 	int select;
@@ -44,7 +47,7 @@ public class FileManager implements MetodosIn {
 		} catch (IOException e) {
 			// Lo que ocurre cuando no consigue leer los datos del fichero.
 			System.out.println("Error en lectura de Fichero");
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -60,7 +63,7 @@ public class FileManager implements MetodosIn {
 		} catch (IOException e) {
 			// Cuando no consigue insertar los datos propuestos.
 			System.out.println("Error insercion en Fichero");
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 
 	}
@@ -85,7 +88,7 @@ public class FileManager implements MetodosIn {
 			} catch (FileNotFoundException e1) {
 				// Si no lo encuentra.
 				System.out.println("No se ha encontrado el archivo");
-				e1.printStackTrace();
+				System.out.println(e1.getMessage());
 			}
 			try {
 				while ((text = in.readLine()) != null) {
@@ -106,20 +109,20 @@ public class FileManager implements MetodosIn {
 					} catch (Exception e) {
 						// Cuando no se ejecute la insercion.
 						System.out.println("No se ha insertado");
-						e.printStackTrace();
+						System.out.println(e.getMessage());
 					}
 				}
 				in.close();
 			} catch (IOException e) {
 				// Si no consigue leer o encontrar el fichero, o no existe.
 				System.out.println("Error en lectura de Fichero o separacion por split");
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 
 		} catch (Exception e) {
 			// Si no consigue conectarse a la BBDD.
 			System.out.println("ERROR, no se ha conectado a la base de datos");
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 
 	}
@@ -139,33 +142,47 @@ public class FileManager implements MetodosIn {
 			} catch (IOException e) {
 				// Lo que ocurre cuando no consigue entrar en los datos del fichero.
 				System.out.println("Error en lectura o escritura de Fichero");
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 
 			break;
 
 		case 2:
 			System.out.println("Borrar una linea");
-			System.out.println("Introduzca Numero de linea que desea borrar");
-			introducido = scanner.nextInt();
+			BufferedReader in = null;
 			try {
-				int numLineas=introducido;
-				int contador=0;
+				in = new BufferedReader(new FileReader("PruebaBorrando.txt"));
+			} catch (FileNotFoundException e1) {
+				System.out.println("No se ha encontrado el archivo");
+				System.out.println(e1.getMessage());
+			}
+			try {
+				Scanner sc = new Scanner(System.in);
+				System.out.println("Escribe el Id de la fila a borrar");
+				String buscado = sc.next();
+				String text;
+				while ((text = in.readLine()) != null) {
+					if (text.contains(buscado)) {
+						//String[] arrOfStr = text.split(";");
 
-				String datos []=new String [numLineas];
-				
-				BufferedReader reader = new BufferedReader(new FileReader("PruebaBorrando.txt"));
-				String linea = reader.readLine();
-
-				while (linea != null && contador<numLineas)
-				{
-				   datos[contador]=linea;
-				   linea = reader.readLine();
-				   contador--;
-				   System.out.println(linea);
+						//System.out.println("el id es " + arrOfStr[0] + " || el nombre  es " + arrOfStr[1] + " || la raza es "
+								//+ arrOfStr[2]);
+					}else {
+						String[] arrOfStr = text.split(";");
+						System.out.println("el id es " + arrOfStr[0] + " || el nombre  es " + arrOfStr[1] + " || la raza es "
+								+ arrOfStr[2]);
+						String linea = arrOfStr[0] + ";" + arrOfStr[1] + ";" + arrOfStr[2];
+						PrintWriter out = new PrintWriter(new FileWriter("PruebaBorrando.txt", true));
+						out.print("\n" + linea);
+						out.close();
+					}
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
+				in.close();
+			}
+
+			catch (IOException e) {
+				System.out.println("Se rompioo");
+				System.out.println(e.getMessage());
 			}
 			break;
 		}
@@ -173,13 +190,77 @@ public class FileManager implements MetodosIn {
 
 	@Override
 	public void busqueda() {
-		// TODO Auto-generated method stub
-		
+		BufferedReader in = null;
+		try {
+			in = new BufferedReader(new FileReader("Prueba3.txt"));
+		} catch (FileNotFoundException e1) {
+			System.out.println("No se ha encontrado el archivo");
+			System.out.println(e1.getMessage());
+		}
+		try {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Escribe el Id de la fila a encontrar");
+			String buscado = sc.next();
+			String text;
+			while ((text = in.readLine()) != null) {
+				if (text.contains(buscado)) {
+					System.out.println("Se ha encontrado el Id en el archivo!");
+					String[] arrOfStr = text.split(";");
+
+					System.out.println("el id es " + arrOfStr[0] + " || el nombre  es " + arrOfStr[1] + " || la raza es "
+							+ arrOfStr[2]);
+				}else {
+				}
+			}
+			in.close();
+		}
+
+		catch (IOException e) {
+			System.out.println("Se rompioo");
+			System.out.println(e.getMessage());
+		}
 	}
 
 	@Override
 	public void modificar() {
-		// TODO Auto-generated method stub
+		System.out.println("**Aqui te muestro lo que contiene el fichero**");
+		try {
+			// Busca el archivo y lee lo que encuentra en el mostrandolo por pantalla.
+			BufferedReader in;
+			in = new BufferedReader(new FileReader("PruebaBorrando.txt"));
+			text = in.readLine();
+			while (text != null) {
+				System.out.println(text);
+				// Para leer diferentes lineas
+				text = in.readLine();
+			}
+			
+			try {
+				System.out.println("Estas seguro de que quieres reescribir el fichero ? --> *si* - *no* ");
+				String question = scanner.nextLine();
+				System.out.println("Digame los nuevos datos para el fichero :");
+				String nuevosDatos = scanner.nextLine();
+				if (question.equalsIgnoreCase("si")) {
+					PrintWriter out = new PrintWriter(new FileWriter("PruebaBorrando.txt"));
+					out.print(nuevosDatos);
+					out.close();
+					System.out.println("**DATOS INTRODUCIDOS CORRECTAMENTE**");
+				}else {
+					System.out.println("DECIDASE PLEASE");
+				}
+				
+			}catch (Exception e) {
+				// Lo que ocurre cuando no consigue leer los datos del fichero.
+				System.out.println("Error al editar el Fichero");
+				System.out.println(e.getMessage());
+			}
+			
+			in.close();
+		} catch (IOException e) {
+			// Lo que ocurre cuando no consigue leer los datos del fichero.
+			System.out.println("Error en lectura de Fichero");
+			System.out.println(e.getMessage());
+		}
 		
 	}
 }

@@ -34,23 +34,27 @@ public class BDManager implements MetodosIn {
 			String url = propiedades.getProperty("dburl");
 			String user = propiedades.getProperty("usuario");
 			String pass = propiedades.getProperty("password");
-			Connection con = DriverManager.getConnection(url, user, pass);
-			// Crea la conexion.
-			System.out.println("¡Conectado a la base de datos!");
-			Statement stmt = con.createStatement();
-			String query = "SELECT * from patos ;";
-			ResultSet rs = stmt.executeQuery(query);
-			while (rs.next()) {
-				// Muestra la informacion de la BBDD y la printea en pantalla con formato.
-				String id = rs.getObject(1).toString();
-				String nombre = rs.getObject(2).toString();
-				String raza = rs.getObject(3).toString();
-				System.out.println(
-						"Id pato: " + id + " || " + " Nombre pato: " + nombre + " || " + " Raza pato: " + raza);
+			try (Connection con = DriverManager.getConnection(url, user, pass)) {
+				// Crea la conexion.
+				System.out.println("¡Conectado a la base de datos!");
+				Statement stmt = con.createStatement();
+				String query = "SELECT * from patos ;";
+				ResultSet rs = stmt.executeQuery(query);
+				while (rs.next()) {
+					// Muestra la informacion de la BBDD y la printea en pantalla con formato.
+					String id = rs.getObject(1).toString();
+					String nombre = rs.getObject(2).toString();
+					String raza = rs.getObject(3).toString();
+					System.out.println(
+							"Id pato: " + id + " || " + " Nombre pato: " + nombre + " || " + " Raza pato: " + raza);
+				}
+			} catch (Exception e) {
+				System.out.println("Problemas para crear la conexion");
+				System.out.println(e.getMessage());
 			}
 		} catch (Exception e) {
 			System.out.println("¡No se ha podido acceder al fichero config.ini o la propia BBDD");
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -92,10 +96,10 @@ public class BDManager implements MetodosIn {
 			} catch (Exception e) {
 				// Cuando no se ejecute la insercion.
 				System.out.println("No se ha insertado");
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			System.out.println("¡No se ha podido conectar a la BBDD!");
 		}
 	}
@@ -132,7 +136,7 @@ public class BDManager implements MetodosIn {
 			} catch (FileNotFoundException e1) {
 				// Si no lo encuentra.
 				System.out.println("No se ha encontrado el archivo");
-				e1.printStackTrace();
+				System.out.println(e1.getMessage());
 			}
 			try {
 				// Insercion en fichero por teclado mediante scanner.
@@ -144,10 +148,10 @@ public class BDManager implements MetodosIn {
 			} catch (IOException e) {
 				// Cuando no consigue insertar los datos propuestos.
 				System.out.println("Error insercion en Fichero");
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -175,10 +179,10 @@ public class BDManager implements MetodosIn {
 				if (deletedRows > 0) {
 					System.out.println("Borrados todos los datos de la bbdd correctamente¡¡");
 				} else {
-					System.out.println("Table already empty.");
+					System.out.println("Table vaciaaa.");
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 				System.out.println("¡NO SE HA PODIDO CONECTAR!");
 			}
 			break;
@@ -231,11 +235,11 @@ public class BDManager implements MetodosIn {
 				con.close();
 
 			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
+				System.out.println(e1.getMessage());
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				System.out.println(e1.getMessage());
 			} catch (SQLException e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 			break;
 		}
@@ -268,7 +272,7 @@ public class BDManager implements MetodosIn {
 			}
 		} catch (Exception e) {
 			System.out.println("¡No se ha podido acceder al fichero config.ini o la propia BBDD");
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 
 	}
@@ -312,7 +316,7 @@ public class BDManager implements MetodosIn {
 			}
 		} catch (Exception e) {
 			System.out.println("¡No se ha podido acceder al fichero config.ini o la propia BBDD");
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 }

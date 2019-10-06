@@ -31,7 +31,7 @@ public class AccesoDatos1 {
 			System.out.println("9. Modificar datos de Fichero");
 			System.out.println("10. Modificar datos de BBDD"); // Funciona
 			System.out.println("11. Buscar datos de BBDD"); // Funciona
-			System.out.println("12. Buscar datos de Fichero"); 	
+			System.out.println("12. Buscar datos de Fichero"); 	// Funciona
 			System.out.println("** *** **");
 			select = scanner.nextInt();
 			switch (select) {
@@ -80,6 +80,7 @@ public class AccesoDatos1 {
 				
 			case 9:
 				System.out.println(" Prueba9 ");
+				datos1.modificar();
 				break;	
 				
 			case 10:
@@ -94,6 +95,7 @@ public class AccesoDatos1 {
 				
 			case 12:
 				System.out.println(" Prueba12 ");
+				datos1.busqueda();
 				break;	
 			}
 
