@@ -33,7 +33,7 @@ public class AccesoDatos1 {
 
 			System.out.println("7. Formas de eliminar datos de Fichero"); // Funciona MITAD
 			System.out.println("8. Formas de eliminar datos de BBDD"); // Funciona
-			System.out.println("9. Modificar datos de Fichero");
+			System.out.println("9. Modificar datos de Fichero"); 
 			System.out.println("10. Modificar datos de BBDD"); // Funciona
 			System.out.println("11. Buscar datos de BBDD"); // Funciona
 			System.out.println("12. Buscar datos de Fichero"); // Funciona
@@ -111,10 +111,12 @@ public class AccesoDatos1 {
 					System.out.println(" Hibernate Seleccionado ");
 					System.out.println("**** Menu Oficial Hibernate **** ");
 					System.out.println(" Porfavor Seleccione que desea: ");
-					System.out.println("1. Leer Datos de BBDD");
-					System.out.println("2. Insertar Datos a BBDD");
-					System.out.println("3. Borrar Datos de BBDD");
+					System.out.println("1. Leer Datos de BBDD"); //Funciona.
+					System.out.println("2. Insertar Datos a BBDD"); //Funciona.
+					System.out.println("3. Borrar Datos de BBDD"); //Funciona.
 					System.out.println("4. Pasar Datos de BBDD a Fichero");
+					System.out.println("5. Modificar Datos de BBDD"); //Funciona.
+					
 					System.out.println("** *** **");
 
 					seleccion = scanner.nextInt();
@@ -139,10 +141,15 @@ public class AccesoDatos1 {
 						System.out.println("Pasar Datos de BBDD a Fichero");
 						datos3.pasarDatos();
 						break;
+						
+					case 5:
+						System.out.println("Modificar datos de BBDD");
+						datos3.modificar();
+						break;	
 					}
 
 					break;
-				} while (select != 5);
+				} while (select != 6);
 			}
 
 		} while (select != 14);

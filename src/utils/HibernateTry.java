@@ -15,6 +15,7 @@ public class HibernateTry implements MetodosIn {
 	private String insercion;
 	private int select;
 	private int seleccion;
+	private int busqueda;
 
 	Session session;
 
@@ -90,14 +91,13 @@ public class HibernateTry implements MetodosIn {
 			break;
 
 		case 2:
+			Zapatillas zapas;
 			System.out.print("Introduce el ID de la Zapatilla a borrar :");
-			
+			busqueda = scanner.nextInt();
+			zapas = (Zapatillas) session.get(Zapatillas.class, busqueda);
 			session.beginTransaction();
-			seleccion = scanner.nextInt();
-			Query que = session.createQuery("select e from Zapatillas where zapId LIKE '" + seleccion + "'");
-			que.executeUpdate();
+			session.delete(zapas);
 			session.getTransaction().commit();
-			
 			System.out.println("Zapatilla borrada......");
 			break;
 		}
@@ -111,6 +111,20 @@ public class HibernateTry implements MetodosIn {
 
 	@Override
 	public void modificar() {
+		Zapatillas zapas;
+		System.out.println("Introduce el id de la zapatilla que quieres modificar");
+		busqueda = scanner.nextInt();
+		
+		zapas = (Zapatillas) session.get(Zapatillas.class, busqueda);
+		System.out.println("Pon el nuevo nombre de la marca de zapatilla");
+		String nombre;
+		nombre = scanner.next();
+		session.beginTransaction();
+		zapas.setZapName(nombre);
+		session.update(zapas);
+		session.getTransaction().commit();
+		System.out.println("Se ha actualizado el nombre de la zapatilla");
+		
 
 	}
 }

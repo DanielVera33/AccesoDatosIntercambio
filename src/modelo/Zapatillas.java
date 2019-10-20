@@ -2,8 +2,8 @@ package modelo;
 
 public class Zapatillas {
 
-	private int zapId;
-	private String zapName;
+	int zapId;
+	String zapName;
 
 	// Constructor
 	public Zapatillas() {
