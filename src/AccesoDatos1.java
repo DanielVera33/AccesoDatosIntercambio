@@ -16,11 +16,13 @@ public class AccesoDatos1 {
 		MetodosIn datos1 = new FileManager();
 		MetodosIn datos2 = new BDManager();
 		utils.MetodosIn datos3 = new HibernateTry();
+		MetodosIn datos4 = new MongoManager();
 		int select;
 		int seleccion;
 		Scanner scanner = new Scanner(System.in);
 		do {
 			System.out.println("** Menu Oficial ** ");
+			System.out.println("****");
 			System.out.println("1. Mostrar datos de BBDD. "); // Funciona
 			System.out.println("2. Añadir datos a BBDD. "); // Funciona
 			System.out.println("3. Mostrar datos de Fichero . "); // Funciona
@@ -28,19 +30,18 @@ public class AccesoDatos1 {
 			System.out.println("5. Pasar los datos del 	Fichero a la BBDD"); // Funciona
 			System.out.println("6. Pasar los datos de la BBDD al Fichero"); // Funciona
 			System.out.println("** *** **");
-
 			System.out.println("******* FASE 2 *******");
-
 			System.out.println("7. Formas de eliminar datos de Fichero"); // Funciona MITAD
 			System.out.println("8. Formas de eliminar datos de BBDD"); // Funciona
-			System.out.println("9. Modificar datos de Fichero"); 
+			System.out.println("9. Modificar datos de Fichero");
 			System.out.println("10. Modificar datos de BBDD"); // Funciona
 			System.out.println("11. Buscar datos de BBDD"); // Funciona
 			System.out.println("12. Buscar datos de Fichero"); // Funciona
 			System.out.println("** *** **");
-
 			System.out.println("******* FASE 3 *******");
 			System.out.println("13. HIBERNATE");
+			System.out.println("******* FASE 4 *******");
+			System.out.println("14. MONGODB");
 			select = scanner.nextInt();
 			switch (select) {
 			case 1:
@@ -105,18 +106,18 @@ public class AccesoDatos1 {
 				System.out.println(" Prueba12 ");
 				datos1.busqueda();
 				break;
-
+				
 			case 13:
 				do {
 					System.out.println(" Hibernate Seleccionado ");
 					System.out.println("**** Menu Oficial Hibernate **** ");
-					System.out.println(" Porfavor Seleccione que desea: ");
-					System.out.println("1. Leer Datos de BBDD"); //Funciona.
-					System.out.println("2. Insertar Datos a BBDD"); //Funciona.
-					System.out.println("3. Borrar Datos de BBDD"); //Funciona.
+					System.out.println("**** Porfavor Seleccione que desea: ");
+					System.out.println("1. Leer Datos de BBDD"); // Funciona.
+					System.out.println("2. Insertar Datos a BBDD"); // Funciona.
+					System.out.println("3. Borrar Datos de BBDD"); // Funciona.
 					System.out.println("4. Pasar Datos de BBDD a Fichero");
-					System.out.println("5. Modificar Datos de BBDD"); //Funciona.
-					
+					System.out.println("5. Modificar Datos de BBDD"); // Funciona.
+					System.out.println("6. Busqueda Datos de BBDD"); // Funciona
 					System.out.println("** *** **");
 
 					seleccion = scanner.nextInt();
@@ -131,29 +132,72 @@ public class AccesoDatos1 {
 						System.out.println("Insertar Datos a BBDD");
 						datos3.insertar();
 						break;
-						
+
 					case 3:
 						System.out.println("Borrar Datos a BBDD");
 						datos3.borrar();
 						break;
-						
+
 					case 4:
 						System.out.println("Pasar Datos de BBDD a Fichero");
 						datos3.pasarDatos();
 						break;
-						
+
 					case 5:
 						System.out.println("Modificar datos de BBDD");
 						datos3.modificar();
-						break;	
-					}
+						break;
 
+					case 6:
+						System.out.println("Buscar datos de BBDD");
+						datos3.busqueda();
+						break;
+					}
+					break;
+				} while (select != 7);
+			case 14:
+				do {
+					System.out.println(" MongoDB Seleccionado ");
+					System.out.println("**** Menu Oficial MONGO **** ");
+					System.out.println("**** Porfavor Seleccione que desea: ");
+					System.out.println("1. Leer todos los datos JSON"); // Funciona.
+					System.out.println("2. Busqueda Uno en JSON"); // Funciona.
+					System.out.println("3. Opciones para Borrar JSON"); // Funciona.
+					System.out.println("4. Modificar Uno en JSON"); // Funciona.
+					System.out.println("5. Insertar Uno en JSON"); // Funciona.
+					System.out.println("** *** **");
+
+					seleccion = scanner.nextInt();
+					switch (seleccion) {
+
+					case 1:
+						System.out.println("Leer todos los datos JSON");
+						datos4.leer();
+						break;
+
+					case 2:
+						System.out.println("Busqueda Uno en JSON");
+						datos4.busqueda();
+						break;
+
+					case 3:
+						System.out.println("Opciones Borrar JSON");
+						datos4.borrar();
+						break;
+
+					case 4:
+						System.out.println("Modificar Uno en JSON");
+						datos4.modificar();
+						break;
+
+					case 5:
+						System.out.println("Insertar Uno en JSON");
+						datos4.insertar();
+						break;
+					}
 					break;
 				} while (select != 6);
 			}
-
-		} while (select != 14);
-
+		} while (select != 15);
 	}
-
 }

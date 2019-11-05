@@ -106,7 +106,13 @@ public class HibernateTry implements MetodosIn {
 
 	@Override
 	public void busqueda() {
-
+		Zapatillas zapas;
+		System.out.println("Inicio Consulta Simple Zapatilla seleccionada");
+		busqueda = scanner.nextInt();
+		zapas = (Zapatillas) session.get(Zapatillas.class, busqueda);
+		session.beginTransaction();
+		System.out.println("-	Id: " + zapas.getZapId() + " - Nombre: " + zapas.getZapName());
+		session.getTransaction().commit();
 	}
 
 	@Override
