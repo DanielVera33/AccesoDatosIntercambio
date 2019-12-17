@@ -14,5 +14,8 @@
 	<classpathentry kind="lib" path="lib/jboss-logging-3.3.0.Final.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.22-bin.jar"/>
 	<classpathentry kind="lib" path="lib/mongo-java-driver-2.10.1.jar"/>
+	<classpathentry kind="lib" path="lib/json/json_simple-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/json/okhttp-2.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/json/okio-1.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

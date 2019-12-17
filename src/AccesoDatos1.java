@@ -17,6 +17,7 @@ public class AccesoDatos1 {
 		MetodosIn datos2 = new BDManager();
 		utils.MetodosIn datos3 = new HibernateTry();
 		MetodosIn datos4 = new MongoManager();
+		MetodosIn datos5 = new AccesoPHPJson();
 		int select;
 		int seleccion;
 		Scanner scanner = new Scanner(System.in);
@@ -42,6 +43,8 @@ public class AccesoDatos1 {
 			System.out.println("13. HIBERNATE");
 			System.out.println("******* FASE 4 *******");
 			System.out.println("14. MONGODB");
+			System.out.println("******* FASE 5 *******");
+			System.out.println("15. PHP JSON");
 			select = scanner.nextInt();
 			switch (select) {
 			case 1:
@@ -197,7 +200,49 @@ public class AccesoDatos1 {
 					}
 					break;
 				} while (select != 6);
+			case 15:
+				do {
+					System.out.println(" PHP JSON Seleccionado ");
+					System.out.println("**** Menu Oficial PHP **** ");
+					System.out.println("**** Porfavor Seleccione que desea: ");
+					System.out.println("1. Leer todos los datos JSON"); // Funciona.
+					System.out.println("2. Busqueda Uno en JSON"); // Funciona.
+					System.out.println("3. Opciones para Borrar JSON"); // Funciona.
+					System.out.println("4. Modificar Uno en JSON"); // Funciona.
+					System.out.println("5. Insertar Uno en JSON"); // Funciona.
+					System.out.println("** *** **");
+
+					seleccion = scanner.nextInt();
+					switch (seleccion) {
+
+					case 1:
+						System.out.println("Leer todos los datos JSON");
+						datos5.leer();
+						break;
+
+					case 2:
+						System.out.println("Busqueda Uno en JSON");
+						datos5.busqueda();
+						break;
+
+					case 3:
+						System.out.println("Opciones Borrar JSON");
+						datos5.borrar();
+						break;
+
+					case 4:
+						System.out.println("Modificar Uno en JSON");
+						datos5.modificar();
+						break;
+
+					case 5:
+						System.out.println("Insertar Uno en JSON");
+						datos5.insertar();
+						break;
+					}
+					break;
+				} while (select != 6);
 			}
-		} while (select != 15);
+		} while (select != 16);
 	}
 }
