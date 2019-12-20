@@ -17,7 +17,7 @@ public class AccesoDatos1 {
 		MetodosIn datos2 = new BDManager();
 		utils.MetodosIn datos3 = new HibernateTry();
 		MetodosIn datos4 = new MongoManager();
-		MetodosIn datos5 = new AccesoPHPJson();
+		InterfazPHP datos5 = new AccesoPHPJson();
 		int select;
 		int seleccion;
 		Scanner scanner = new Scanner(System.in);
@@ -217,27 +217,25 @@ public class AccesoDatos1 {
 
 					case 1:
 						System.out.println("Leer todos los datos JSON");
-						datos5.leer();
+						datos5.lee();
 						break;
 
 					case 2:
 						System.out.println("Busqueda Uno en JSON");
-						datos5.busqueda();
 						break;
 
 					case 3:
 						System.out.println("Opciones Borrar JSON");
-						datos5.borrar();
 						break;
 
 					case 4:
 						System.out.println("Modificar Uno en JSON");
-						datos5.modificar();
+						datos5.updateZapatillaJSON();
 						break;
 
 					case 5:
 						System.out.println("Insertar Uno en JSON");
-						datos5.insertar();
+						datos5.anadirZapatillaJSON();
 						break;
 					}
 					break;

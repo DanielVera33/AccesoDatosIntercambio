@@ -9,6 +9,11 @@ public class Zapatillas {
 	public Zapatillas() {
 
 	}
+	
+	public Zapatillas(int id, String nombre) {
+		this.zapId = id;
+		this.zapName = nombre;
+	}
 
 	// Getters y setters
 
