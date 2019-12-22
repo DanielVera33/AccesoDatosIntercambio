@@ -206,8 +206,8 @@ public class AccesoDatos1 {
 					System.out.println("**** Menu Oficial PHP **** ");
 					System.out.println("**** Porfavor Seleccione que desea: ");
 					System.out.println("1. Leer todos los datos JSON"); // Funciona.
-					System.out.println("2. Busqueda Uno en JSON"); // Funciona.
-					System.out.println("3. Opciones para Borrar JSON"); // Funciona.
+					System.out.println("2. Busqueda Uno en JSON");
+					System.out.println("3. Borrar JSON"); // Funciona.
 					System.out.println("4. Modificar Uno en JSON"); // Funciona.
 					System.out.println("5. Insertar Uno en JSON"); // Funciona.
 					System.out.println("** *** **");
@@ -226,6 +226,7 @@ public class AccesoDatos1 {
 
 					case 3:
 						System.out.println("Opciones Borrar JSON");
+						datos5.borrarZapatillaJSON();
 						break;
 
 					case 4:

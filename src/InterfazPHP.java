@@ -6,4 +6,5 @@ public interface InterfazPHP {
 	public HashMap<Integer, Zapatillas> lee();
 	public void anadirZapatillaJSON();
 	public void updateZapatillaJSON();
+	public void borrarZapatillaJSON();
 }
