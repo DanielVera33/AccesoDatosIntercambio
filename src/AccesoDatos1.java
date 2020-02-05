@@ -13,11 +13,20 @@ import utils.HibernateTry;
 
 public class AccesoDatos1 {
 	public static void main(String[] args) throws IOException {
+		
+		// For Text Files Access
 		MetodosIn datos1 = new FileManager();
+		// For DataBase MySQL Access
 		MetodosIn datos2 = new BDManager();
+		// For Hibernate Access
 		utils.MetodosIn datos3 = new HibernateTry();
+		// For MongoDB Access
 		MetodosIn datos4 = new MongoManager();
+		// For PHP Json Access
 		InterfazPHP datos5 = new AccesoPHPJson();
+		// For Node Access
+		InterfazPHP datos6 = new AccesoNode();
+		
 		int select;
 		int seleccion;
 		Scanner scanner = new Scanner(System.in);
@@ -45,6 +54,8 @@ public class AccesoDatos1 {
 			System.out.println("14. MONGODB");
 			System.out.println("******* FASE 5 *******");
 			System.out.println("15. PHP JSON");
+			System.out.println("******* FASE 6 *******");
+			System.out.println("16. Node JSON");
 			select = scanner.nextInt();
 			switch (select) {
 			case 1:
@@ -241,6 +252,49 @@ public class AccesoDatos1 {
 					}
 					break;
 				} while (select != 6);
+				
+			case 16:
+				do {
+					System.out.println(" Node sql Seleccionado ");
+					System.out.println("**** Menu Oficial Node **** ");
+					System.out.println("**** Porfavor Seleccione que desea: ");
+					System.out.println("1. Leer todos los datos sql");
+					System.out.println("2. ---------");
+					System.out.println("3. Borrar slq");
+					System.out.println("4. Modificar Uno en sql");
+					System.out.println("5. Insertar Uno en sql");
+					System.out.println("** *** **");
+
+					seleccion = scanner.nextInt();
+					switch (seleccion) {
+
+					case 1:
+						System.out.println("Leer todos los datos sql");
+						datos6.lee();
+						break;
+
+					case 2:
+						System.out.println("Busqueda Uno en sql");
+						break;
+
+					case 3:
+						System.out.println("Opciones Borrar sql");
+						datos6.borrarZapatillaJSON();
+						break;
+
+					case 4:
+						System.out.println("Modificar Uno en sql");
+						datos6.updateZapatillaJSON();
+						break;
+
+					case 5:
+						System.out.println("Insertar Uno en sql");
+						datos6.anadirZapatillaJSON();
+						break;
+					}
+					break;
+				} while (select != 6);
+				
 			}
 		} while (select != 16);
 	}

@@ -1,0 +1,23 @@
+{
+  "name": "mysqltest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "demo_db_connection.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.2",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "cli": "^1.0.1",
+    "express": "^4.17.1",
+    "body-parser": "^1.19.0",
+    "mysql": "^2.17.1",
+    "sequelize": "^5.21.3",
+    "mysql2": "^2.1.0"
+  }
+}
